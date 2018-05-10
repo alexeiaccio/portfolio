@@ -159,9 +159,6 @@ header span {
 .gatsby-resp-image-background-image {
   flex: 1 0 100%;
   font-size: 50%;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
   color: var(--bg)
 }
 
