@@ -125,6 +125,7 @@ header {
   width: 100%;
   padding: 20px;
   user-select: none;
+  z-index: 2000;
 }
 
 header a,
@@ -141,7 +142,28 @@ header span {
   color: var(--text);
 }
 
+.gatsby-resp-image-figure {
+  width: 100vw;
+  height: 100vh;
+}
+
 .gatsby-resp-image-wrapper {
-  width: 1200px;
-  height: auto;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);
+  width: auto;
+  overflow: hidden;
+}
+
+.gatsby-resp-image-background-image {
+  flex: 0 0 100%;
+}
+
+.gatsby-resp-image-figcaption {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  font-size: 50%;
 }

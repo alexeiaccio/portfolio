@@ -17,7 +17,9 @@ module.exports = {
             options: {
               maxWidth: 1200,
               backgroundColor: "transparent",
-              linkImagesToOriginal: false
+              linkImagesToOriginal: false,
+              showCaptions: true,
+              backgroundColor: '#cacbcc'
             }
           },
           `gatsby-remark-copy-linked-files`,
