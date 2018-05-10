@@ -6,7 +6,7 @@ import createHistory from 'history/createBrowserHistory';
 
 import getTransitionStyle from './src/utils/getTransitionStyle';
 
-const timeout = 500;
+const timeout = 200;
 const historyExitingEventType = `history::exiting`;
 
 const getUserConfirmation = (message, callback) => {
