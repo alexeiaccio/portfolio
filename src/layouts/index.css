@@ -150,17 +150,19 @@ header span {
 .gatsby-resp-image-wrapper {
   display: flex !important;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: calc(100vh - 100px);
   width: auto;
   overflow: hidden;
 }
 
 .gatsby-resp-image-background-image {
-  flex: 1 0 100%;
+  flex: 0 0 100%;
   font-size: 50%;
-  color: var(--bg)
+  color: var(--bg);
 }
+
+.gatsby-resp-image-image {}
 
 .gatsby-resp-image-figcaption {
   display: flex !important;
