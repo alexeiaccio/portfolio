@@ -157,7 +157,7 @@ header span {
 }
 
 .gatsby-resp-image-background-image {
-  flex: 0 0 100%;
+  flex: 1 0 100%;
 }
 
 .gatsby-resp-image-figcaption {
