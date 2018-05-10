@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    name: `Fabian Schultz`,
-    title: `Gatsby Deck`,
-    date: `November 23, 2017`
+    name: `Alexei Accio`,
+    title: `Portfolio`,
+    date: `May 2018`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -10,9 +10,24 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: [`gatsby-remark-smartypants`]
+        plugins: [
+          `gatsby-plugin-sharp`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1200,
+              backgroundColor: "transparent",
+              linkImagesToOriginal: false
+            }
+          },
+          `gatsby-remark-copy-linked-files`,
+          `gatsby-remark-smartypants`
+        ]
       }
     },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-catch-links`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
