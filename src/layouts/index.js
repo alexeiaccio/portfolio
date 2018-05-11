@@ -6,7 +6,24 @@ import Swipeable from 'react-swipeable';
 
 import './index.css';
 
-class Header extends Component {
+const Header = ({ name, title, date, path }) => (
+  <header>
+    <nav>
+      <span>{name}</span>
+       — 
+      {path
+        ? <span>Резюме — <Link to="/1" title="Посмотреть портфолио">{title}</Link></span>
+        : <span>{title} — <Link to="/resume" title="Посмотреть резюме">Резюме</Link></span>
+      }
+    </nav>
+    <time>{date}</time>
+  </header>
+)
+
+class TemplateWrapper extends Component {
+  NEXT = 39;
+  PREV = 37;
+
   constructor() {
     super()
     this.state = {
@@ -14,41 +31,11 @@ class Header extends Component {
     }
   }
 
-  componentDidMount = () => {
-    this.whatPath()
-  }
-
-  componentDidUpdate = () => {
-    this.whatPath()
-  }
-
   whatPath = () => {
     window.location.pathname.includes('res')
     ? !this.state.resume && this.setState({ resume: true })
     : this.state.resume && this.setState({ resume: false })
   }
-
-  render() {
-    const { name, title, date } = this.props
-    return (
-      <header>
-        <nav>
-          <span>{name}</span>
-           — 
-          {this.state.resume
-            ? <span>Резюме — <Link to="/1" title="Посмотреть портфолио">{title}</Link></span>
-            : <span>{title} — <Link to="/resume" title="Посмотреть резюме">Резюме</Link></span>
-          }
-        </nav>
-        <time>{date}</time>
-      </header>
-    )
-  }
-}
-
-class TemplateWrapper extends Component {
-  NEXT = 39;
-  PREV = 37;
 
   swipeLeft = () => {
     this.navigate({ keyCode: this.NEXT });
@@ -86,6 +73,11 @@ class TemplateWrapper extends Component {
 
   componentDidMount() {
     document.addEventListener('keydown', this.navigate);
+    this.whatPath()
+  }
+
+  componentDidUpdate = () => {
+    this.whatPath()
   }
 
   componentWillUnmount() {
@@ -104,12 +96,13 @@ class TemplateWrapper extends Component {
           name={data.site.siteMetadata.name}
           title={data.site.siteMetadata.title}
           date={data.site.siteMetadata.date}
+          path={this.state.resume}
         />
         <Swipeable
           onSwipingLeft={this.swipeLeft}
           onSwipingRight={this.swipeRight}
         >
-          <div id="slide">{children()}</div>
+          <div id={this.state.resume ? 'resume' : 'slide'}>{children()}</div>
         </Swipeable>
       </div>
     );

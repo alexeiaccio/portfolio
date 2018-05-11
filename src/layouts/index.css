@@ -43,6 +43,18 @@ html {
   -webkit-overflow-scrolling: touch;
 }
 
+#resume {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+  text-align: center;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
 a {
   color: var(--text);
   text-decoration-skip: ink;
@@ -152,15 +164,16 @@ p {
   padding: 0;
 }
 
+li {
+  list-style: none;
+}
+
 .gatsby-resp-image-figure {
   height: 100vh;
   width: 100vw;
 }
 
 .gatsby-resp-image-wrapper {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
   width: 100vw;
   height: calc(100vh - 100px);
   overflow: hidden;
@@ -171,8 +184,6 @@ p {
   font-size: 50%;
   color: var(--bg);
 }
-
-.gatsby-resp-image-image {}
 
 .gatsby-resp-image-figcaption,
 ul {
@@ -185,6 +196,32 @@ ul {
   font-size: 50%;
 }
 
-li {
-  list-style: none;
+hr {
+  margin: 25px auto;
+  border-color: var(--bg);
+  color: var(--bg);
+  background-color: var(--bg);
+}
+
+table {
+  font-size: 50%;
+}
+
+th {
+  text-align: left;
+  padding: 5px 10px;
+  font-weight: 300;
+  font-style: italic;
+}
+
+td {
+  text-align: left;
+  padding: 5px 10px;
+}
+
+.resume-image {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+  background: url(./images/accio.png) no-repeat;
 }
