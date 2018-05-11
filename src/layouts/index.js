@@ -6,14 +6,45 @@ import Swipeable from 'react-swipeable';
 
 import './index.css';
 
-const Header = ({ name, title, date }) => (
-  <header>
-    <Link to="/1">
-      <span>{name}</span> — {title}
-    </Link>
-    <time>{date}</time>
-  </header>
-);
+class Header extends Component {
+  constructor() {
+    super()
+    this.state = {
+      resume: false
+    }
+  }
+
+  componentDidMount = () => {
+    this.whatPath()
+  }
+
+  componentDidUpdate = () => {
+    this.whatPath()
+  }
+
+  whatPath = () => {
+    window.location.pathname.includes('res')
+    ? !this.state.resume && this.setState({ resume: true })
+    : this.state.resume && this.setState({ resume: false })
+  }
+
+  render() {
+    const { name, title, date } = this.props
+    return (
+      <header>
+        <nav>
+          <span>{name}</span>
+           — 
+          {this.state.resume
+            ? <span>Резюме — <Link to="/1" title="Посмотреть портфолио">{title}</Link></span>
+            : <span>{title} — <Link to="/resume" title="Посмотреть резюме">Резюме</Link></span>
+          }
+        </nav>
+        <time>{date}</time>
+      </header>
+    )
+  }
+}
 
 class TemplateWrapper extends Component {
   NEXT = 39;
