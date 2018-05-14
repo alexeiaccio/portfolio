@@ -6,7 +6,7 @@ import Swipeable from 'react-swipeable';
 
 import './index.css';
 
-const Header = ({ name, title, date, path }) => (
+const Header = ({ name, title, date, path, now, slides }) => (
   <header>
     <nav>
       <Link to="/1" title="Вернуться на первую">
@@ -18,6 +18,7 @@ const Header = ({ name, title, date, path }) => (
         : <span>{title} — <Link to="/resume" title="Посмотреть резюме">Резюме</Link></span>
       }
     </nav>
+    <span className="pagination">{now} / {slides}</span>
     <time>{date}</time>
   </header>
 )
@@ -26,10 +27,18 @@ class TemplateWrapper extends Component {
   NEXT = 39;
   PREV = 37;
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      resume: false
+      resume: false,
+      now: parseInt(location.pathname.substr(1)),
+      slides: this.props.data.allMarkdownRemark.edges.filter(({ node }) => {
+        const id = node.fileAbsolutePath.replace(/^.*[\\\/]/, '').split('.')[0];
+
+        if (id && id !== 404) {
+          return true;
+        }
+      })
     }
   }
 
@@ -78,8 +87,11 @@ class TemplateWrapper extends Component {
     this.whatPath()
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (prevState) => {
     this.whatPath()
+    let newNow = location.pathname.substr(1)
+    if (this.state.now !== newNow)
+      this.setState({ now: newNow })
   }
 
   componentWillUnmount() {
@@ -98,6 +110,8 @@ class TemplateWrapper extends Component {
           title={data.site.siteMetadata.title}
           date={data.site.siteMetadata.date}
           path={this.state.resume}
+          now={this.state.now}
+          slides={this.state.slides.length-1}
         />
         <Swipeable
           onSwipingLeft={this.swipeLeft}

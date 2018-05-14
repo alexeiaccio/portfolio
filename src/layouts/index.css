@@ -141,6 +141,7 @@ header {
 }
 
 header a,
+.pagination,
 time {
   text-decoration: none;
   color: var(--meta);
@@ -175,13 +176,18 @@ li {
 
 .gatsby-resp-image-figure,
 .gatsby-resp-image-wrapper {
+  display: flex !important;
+  justify-content: center;
+  align-items: flex-end;
   width: 100vw;
   height: 100vh;
   margin: 0;
+  padding-bottom: 100px;
   overflow: hidden;
 }
 
 .gatsby-resp-image-background-image {
+  flex: 1 1 auto;
   font-size: 50%;
   color: var(--meta);
 }
