@@ -61,7 +61,7 @@ class TemplateWrapper extends Component {
     if (now) {
       if (keyCode === this.PREV && now === 1) {
         return false;
-      } else if (keyCode === this.NEXT && now === slides.length) {
+      } else if (keyCode === this.NEXT && now === (slides.length - 1)) {
         return false;
       } else if (keyCode === this.NEXT) {
         navigateTo(`/${now + 1}`);
@@ -89,8 +89,7 @@ class TemplateWrapper extends Component {
     return (
       <div>
         <Helmet
-          title={`${data.site.siteMetadata.title} — ${data.site.siteMetadata
-            .name}`}
+          title={`${this.state.resume ? 'Резюме' : data.site.siteMetadata.title} — ${data.site.siteMetadata.name}`}
         />
         <Header
           name={data.site.siteMetadata.name}

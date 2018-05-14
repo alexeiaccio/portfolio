@@ -180,7 +180,8 @@ li {
 }
 
 .gatsby-resp-image-background-image {
-  flex: 0 0 100%;
+  width: auto;
+  height: auto;
   font-size: 50%;
   color: var(--bg);
 }
