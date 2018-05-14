@@ -9,10 +9,12 @@ import './index.css';
 const Header = ({ name, title, date, path }) => (
   <header>
     <nav>
-      <span>{name}</span>
+      <Link to="/1" title="Вернуться на первую">
+        <span className="logo" >{name}</span>
+      </Link>
        — 
       {path
-        ? <span>Резюме — <Link to="/1" title="Посмотреть портфолио">{title}</Link></span>
+        ? <span>Резюме — <a href="javascript:history.back()" title="Посмотреть портфолио">{title}</a></span>
         : <span>{title} — <Link to="/resume" title="Посмотреть резюме">Резюме</Link></span>
       }
     </nav>
