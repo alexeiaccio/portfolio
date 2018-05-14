@@ -178,7 +178,7 @@ li {
 .gatsby-resp-image-wrapper {
   display: flex !important;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   width: 100vw;
   height: 100vh;
   margin: 0;
@@ -187,7 +187,7 @@ li {
 }
 
 .gatsby-resp-image-background-image {
-  flex: 1 1 auto;
+  flex: 1 0 100%;
   font-size: 50%;
   color: var(--meta);
   background-image: none !important;
