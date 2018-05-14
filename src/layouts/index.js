@@ -19,7 +19,7 @@ const Header = ({ name, title, date, path, now, slides }) => (
         : <span>{title} — <Link to="/resume" title="Посмотреть резюме">Резюме</Link></span>
       }
     </nav>
-    {!path && (now !== (NaN || 1)) &&
+    {!path && !isNaN(now) && now !== 1 &&
       <span className="pagination">{now} / {slides}</span>
     }
     <time>{date}</time>
@@ -96,7 +96,7 @@ class TemplateWrapper extends Component {
   componentDidUpdate = (prevState) => {
     this.whatPath()
     let newNow = parseInt(window.location.pathname.substr(1))
-    if (!this.state.resume && this.state.now !== newNow)
+    if (!this.state.resume && !isNaN(newNow) && this.state.now !== parseInt(newNow))
       this.setState({ now: newNow })
   }
 
