@@ -19,7 +19,7 @@ const Header = ({ name, title, date, path, now, slides }) => (
         : <span>{title} — <Link to="/resume" title="Посмотреть резюме">Резюме</Link></span>
       }
     </nav>
-    {!path && (now !== (undefined || 1)) &&
+    {!path && (now !== (NaN || 1)) &&
       <span className="pagination">{now} / {slides}</span>
     }
     <time>{date}</time>
