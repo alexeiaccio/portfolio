@@ -33,7 +33,8 @@ class TemplateWrapper extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      resume: false
+      resume: false,
+      now: 1,
     }
   }
 
