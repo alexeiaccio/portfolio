@@ -32,15 +32,7 @@ class TemplateWrapper extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      resume: false,
-      now: parseInt(window.location.pathname.substr(1)),
-      slides: this.props.data.allMarkdownRemark.edges.filter(({ node }) => {
-        const id = node.fileAbsolutePath.replace(/^.*[\\\/]/, '').split('.')[0];
-
-        if (id && id !== 404) {
-          return true;
-        }
-      })
+      resume: false
     }
   }
 
@@ -87,6 +79,16 @@ class TemplateWrapper extends Component {
   componentDidMount() {
     document.addEventListener('keydown', this.navigate);
     this.whatPath()
+    this.setState({
+      now: parseInt(window.location.pathname.substr(1)),
+      slides: parseInt(this.props.data.allMarkdownRemark.edges.filter(({ node }) => {
+        const id = node.fileAbsolutePath.replace(/^.*[\\\/]/, '').split('.')[0];
+
+        if (id && id !== 404) {
+          return true;
+        }
+      }).length) - 1
+    })
   }
 
   componentDidUpdate = (prevState) => {
@@ -113,7 +115,7 @@ class TemplateWrapper extends Component {
           date={data.site.siteMetadata.date}
           path={this.state.resume}
           now={this.state.now}
-          slides={this.state.slides.length-1}
+          slides={this.state.slides}
         />
         <Swipeable
           onSwipingLeft={this.swipeLeft}
