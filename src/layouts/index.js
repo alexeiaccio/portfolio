@@ -18,7 +18,9 @@ const Header = ({ name, title, date, path, now, slides }) => (
         : <span>{title} — <Link to="/resume" title="Посмотреть резюме">Резюме</Link></span>
       }
     </nav>
-    <span className="pagination">{now} / {slides}</span>
+    {!path &&
+      <span className="pagination">{now} / {slides}</span>
+    }
     <time>{date}</time>
   </header>
 )
@@ -31,7 +33,7 @@ class TemplateWrapper extends Component {
     super(props)
     this.state = {
       resume: false,
-      now: parseInt(location.pathname.substr(1)),
+      now: parseInt(window.location.pathname.substr(1)),
       slides: this.props.data.allMarkdownRemark.edges.filter(({ node }) => {
         const id = node.fileAbsolutePath.replace(/^.*[\\\/]/, '').split('.')[0];
 
@@ -89,8 +91,8 @@ class TemplateWrapper extends Component {
 
   componentDidUpdate = (prevState) => {
     this.whatPath()
-    let newNow = location.pathname.substr(1)
-    if (this.state.now !== newNow)
+    let newNow = parseInt(window.location.pathname.substr(1))
+    if (!this.state.resume && this.state.now !== newNow)
       this.setState({ now: newNow })
   }
 
