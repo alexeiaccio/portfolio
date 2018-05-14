@@ -7,23 +7,20 @@ import Swipeable from 'react-swipeable';
 import './index.css';
 import favicon from './favicon.png';
 
-const Header = ({ name, title, date, path, now, slides }) => (
+const Header = ({ name, title, date, resume, welcome, now, slides }) => (
   <header>
     <nav>
-      <Link to="/1" title="Вернуться на первую">
+      <Link to="/welcome" title="Вернуться на первую">
         <span className="logo" >{name}</span>
       </Link>
        — 
-      {path
+      {resume
         ? <span>Резюме — <span className="button-back" onClick={() => history.back(1)} title="Посмотреть портфолио">{title}</span></span>
         : <span>{title} — <Link to="/resume" title="Посмотреть резюме">Резюме</Link></span>
       }
     </nav>
-    {!path && now !== 1 &&
-      <span className="pagination">{now} / {slides}</span>
-    }
-    {
-     console.log(history)
+    {!resume && !welcome && now &&
+      <span className="pagination">{now} / {slides - 2}</span>
     }
     <time>{date}</time>
   </header>
@@ -66,16 +63,22 @@ class TemplateWrapper extends Component {
         }
       }
     );
-
+    
     if (now) {
-      if (keyCode === this.PREV && now === 1) {
-        navigateTo(`/${slides.length - 1}`);
-      } else if (keyCode === this.NEXT && now === (slides.length - 1)) {
+      if (keyCode === this.PREV && now === (slides.length - 2)) {
         navigateTo('/1');
+      } else if (keyCode === this.NEXT && now === 1) {        
+        navigateTo(`/${slides.length - 2}`);
       } else if (keyCode === this.NEXT) {
-        navigateTo(`/${now + 1}`);
-      } else if (keyCode === this.PREV) {
         navigateTo(`/${now - 1}`);
+      } else if (keyCode === this.PREV) {
+        navigateTo(`/${now + 1}`);
+      }
+    } else {
+      if (keyCode === this.PREV && location.pathname.substr(1) === 'welcome') {
+        navigateTo('/1');
+      } else if (keyCode === this.NEXT && location.pathname.substr(1) === 'welcome') {              
+        navigateTo(`/${slides.length - 2}`);
       }
     }
   };
@@ -84,21 +87,21 @@ class TemplateWrapper extends Component {
     document.addEventListener('keydown', this.navigate);
     this.whatPath()
     this.setState({
-      now: parseInt(window.location.pathname.substr(1)),
+      now: window.location.pathname.substr(1),
       slides: parseInt(this.props.data.allMarkdownRemark.edges.filter(({ node }) => {
         const id = node.fileAbsolutePath.replace(/^.*[\\\/]/, '').split('.')[0];
 
         if (id && id !== 404) {
           return true;
         }
-      }).length) - 1
+      }).length)
     })
   }
 
   componentDidUpdate = (prevState) => {
     this.whatPath()
     let newNow = parseInt(window.location.pathname.substr(1))
-    if (!this.state.resume && !isNaN(newNow) && this.state.now !== parseInt(newNow))
+    if (!this.state.resume && !isNaN(newNow) && this.state.now !== newNow)
       this.setState({ now: newNow })
   }
 
@@ -119,8 +122,9 @@ class TemplateWrapper extends Component {
           name={data.site.siteMetadata.name}
           title={data.site.siteMetadata.title}
           date={data.site.siteMetadata.date}
-          path={this.state.resume}
-          now={this.state.now || 1}
+          resume={this.state.resume}
+          welcome={location.pathname.substr(1) === 'welcome'}
+          now={this.state.now}
           slides={this.state.slides}
         />
         <Swipeable

@@ -3,7 +3,7 @@ import { navigateTo } from 'gatsby-link';
 
 class Index extends Component {
   componentDidMount() {
-    navigateTo(`/1`);
+    navigateTo(`/welcome`);
   }
   render() {
     return <div />;
