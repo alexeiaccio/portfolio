@@ -100,8 +100,8 @@ class TemplateWrapper extends Component {
 
   componentDidUpdate = (prevState) => {
     this.whatPath()
-    let newNow = parseInt(window.location.pathname.substr(1))
-    if (!this.state.resume && !isNaN(newNow) && this.state.now !== newNow)
+    let newNow = window.location.pathname.substr(1)
+    if (!this.state.resume && this.state.now !== newNow)
       this.setState({ now: newNow })
   }
 
@@ -123,7 +123,7 @@ class TemplateWrapper extends Component {
           title={data.site.siteMetadata.title}
           date={data.site.siteMetadata.date}
           resume={this.state.resume}
-          welcome={location.pathname.substr(1) === 'welcome'}
+          welcome={this.state.now === 'welcome'}
           now={this.state.now}
           slides={this.state.slides}
         />
