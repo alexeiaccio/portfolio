@@ -15,12 +15,15 @@ const Header = ({ name, title, date, path, now, slides }) => (
       </Link>
        — 
       {path
-        ? <span>Резюме — <a href="javascript:history.back()" title="Посмотреть портфолио">{title}</a></span>
+        ? <span>Резюме — <span className="button-back" onClick={() => history.back(1)} title="Посмотреть портфолио">{title}</span></span>
         : <span>{title} — <Link to="/resume" title="Посмотреть резюме">Резюме</Link></span>
       }
     </nav>
-    {!path && !isNaN(now) && now !== 1 &&
+    {!path && now !== 1 &&
       <span className="pagination">{now} / {slides}</span>
+    }
+    {
+     console.log(history)
     }
     <time>{date}</time>
   </header>
@@ -34,7 +37,6 @@ class TemplateWrapper extends Component {
     super(props)
     this.state = {
       resume: false,
-      now: 1,
     }
   }
 
@@ -67,9 +69,9 @@ class TemplateWrapper extends Component {
 
     if (now) {
       if (keyCode === this.PREV && now === 1) {
-        return false;
+        navigateTo(`/${slides.length - 1}`);
       } else if (keyCode === this.NEXT && now === (slides.length - 1)) {
-        return false;
+        navigateTo('/1');
       } else if (keyCode === this.NEXT) {
         navigateTo(`/${now + 1}`);
       } else if (keyCode === this.PREV) {
@@ -118,7 +120,7 @@ class TemplateWrapper extends Component {
           title={data.site.siteMetadata.title}
           date={data.site.siteMetadata.date}
           path={this.state.resume}
-          now={this.state.now}
+          now={this.state.now || 1}
           slides={this.state.slides}
         />
         <Swipeable
