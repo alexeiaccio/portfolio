@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 import Swipeable from 'react-swipeable';
 
 import './index.css';
+import favicon from './favicon.png';
 
 const Header = ({ name, title, date, path, now, slides }) => (
   <header>
@@ -108,7 +109,9 @@ class TemplateWrapper extends Component {
       <div>
         <Helmet
           title={`${this.state.resume ? 'Резюме' : data.site.siteMetadata.title} — ${data.site.siteMetadata.name}`}
-        />
+        >
+          <link rel="icon" type="image/png" sizes="16x16" href={favicon} />
+        </Helmet>
         <Header
           name={data.site.siteMetadata.name}
           title={data.site.siteMetadata.title}
