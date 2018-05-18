@@ -1,6 +1,6 @@
 <div class="resume-image"> </div>
 
-## <i><span style='font-weight:300'>Резюме</span></i><br/><i><span style='font-weight:500'>Алексей</span> Ачё <span style='font-weight:300'>(Тукачёв)</span></i>
+## <i><span style='font-weight:300'>Резюме</span></i><br/><i><span style='font-weight:500'>Алексей</span> Ачё</i>
 
 ---
 
