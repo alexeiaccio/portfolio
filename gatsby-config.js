@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     name: `Алексей Ачё`,
     title: `Портфолио`,
-    date: `Май 2018`
+    date: `Сентябрь 2018`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -19,7 +19,7 @@ module.exports = {
               backgroundColor: "transparent",
               linkImagesToOriginal: false,
               showCaptions: false,
-              backgroundColor: '#ffffff'
+              backgroundColor: "#ffffff"
             }
           },
           `gatsby-remark-copy-linked-files`,
